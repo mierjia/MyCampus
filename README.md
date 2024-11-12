@@ -1,4 +1,4 @@
-# InterConnect--校园信息综合平台
+# MyCampus--校园信息综合平台
 
 # 运行
 
