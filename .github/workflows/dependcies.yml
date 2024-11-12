@@ -1,0 +1,29 @@
+# This workflow will install npm dependencies
+name: npminstall
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  dependencies-install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Admin dependencies
+      - run: 
+          cd admin
+          npm i
+      - name: Server dependencies
+      - run: 
+          cd server
+          npm i
+      - name: Web dependencies
+      - run: 
+          cd web
+          npm i
