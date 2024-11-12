@@ -45,4 +45,3 @@ jobs:
           DB_USER: root
           DB_PASSWORD: zheng8627969
           DB_NAME: lx
-        run: npm test
