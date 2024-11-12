@@ -15,7 +15,7 @@ jobs:
         image: mysql:8  # 使用 MySQL 8 版本
         env:
           MYSQL_ROOT_PASSWORD: zheng8627969  # MySQL root 密码
-          MYSQL_DATABASE:lx          # 数据库名称
+          MYSQL_DATABASE: lx          # 数据库名称
         ports:
           - 3306:3306
         
