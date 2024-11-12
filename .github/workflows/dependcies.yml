@@ -25,6 +25,7 @@ jobs:
       - name: Admin dependencies
         run: 
           cd admin
+      - name: Admin dependencies-2
           npm i
       - name: Server dependencies
         run: 
