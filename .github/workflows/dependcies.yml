@@ -27,7 +27,7 @@ jobs:
           cd admin
       - name: Admin dependencies-2
         run:
-          express@^4.17.1
+          npm install express@^4.17.1
       - name: Server dependencies
         run: 
           cd server
