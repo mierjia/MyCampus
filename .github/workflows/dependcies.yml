@@ -15,14 +15,14 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Admin dependencies
-      - run: 
+        run: 
           cd admin
           npm i
       - name: Server dependencies
-      - run: 
+        run: 
           cd server
           npm i
       - name: Web dependencies
-      - run: 
+        run: 
           cd web
           npm i
