@@ -38,10 +38,3 @@ jobs:
           MYSQL_PWD: zheng8627969  # 设置 MySQL 密码环境变量
         run: |
           mysql -h 127.0.0.1 -u testuser testdb < ./database/database.sql  # 导入 .sql 文件数据
-
-      - name: Run tests
-        env:
-          DB_HOST: 127.0.0.1
-          DB_USER: root
-          DB_PASSWORD: zheng8627969
-          DB_NAME: lx
