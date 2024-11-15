@@ -29,8 +29,12 @@ jobs:
       - name: Server dependencies
         run: 
           cd server
+      - name: Server dependencies-2
+        run: 
           npm i
       - name: Web dependencies
         run: 
           cd web
+      - name: Server dependencies-2
+        run: 
           npm i
