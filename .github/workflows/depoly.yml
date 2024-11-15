@@ -42,9 +42,12 @@ jobs:
         run: 
           cd admin && npm run lint
 
-      - name: Build Vue app
+      - name: Build Web
         run: 
           cd web && npm run build
+      - name: Build Admin
+        run: 
+          cd admin && npm run build
           
       - name: Commit build files
         run: |
@@ -52,11 +55,11 @@ jobs:
           git config --global user.email "2745414799@qq.com" 
           
           # 将生成的文件添加到仓库
-          git add -f web/dist  # 假设构建结果位于 dist 文件夹
+          git add -f web/dist admin/dist  # 假设构建结果位于 dist 文件夹
           
           # 提交并推送到仓库
           git commit -m "Add build files"
-          git push origin main  # 推送到 main 分支
+          git push -f origin main  # 推送到 main 分支
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
