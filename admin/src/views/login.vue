@@ -2,7 +2,7 @@
   <div id="login" style="    width: 100%;height: 100%;">
     <loginparticles />
     <div class="login-box">
-      <p class="title">InterConnect后台管理系统</p>
+      <p class="title">MyCampus后台管理系统</p>
       <form action id="form" @submit.prevent="onSubmit">
         <p class="usericon">
           <input
