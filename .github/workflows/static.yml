@@ -73,7 +73,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # Single deploy job since we're just deploying
   deploy:
-    needs : dependencies-install
     environment:
       name: github-pages
       url:  http://localhost:8080/
