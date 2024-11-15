@@ -10,7 +10,7 @@ permissions:
   id-token: write
   repository-projects: write
 jobs:
-  deploy:
+  preparation:
     runs-on: windows-latest
     steps:
       - name: Checkout code
@@ -21,8 +21,9 @@ jobs:
         with:
           node-version: '20'
 
-  dependencies-install:
+  CI:
     runs-on: windows-latest
+    needs: preparation
     steps:
       - uses: actions/checkout@v4
       - name: Admin dependencies
@@ -63,12 +64,28 @@ jobs:
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          
-
-      # - name: Deploy to GitHub Pages
-      #  uses: JamesIves/github-pages-deploy-action@v4
-      #  with:
-       #   branch: page   # 部署到page 分支
-     #     folder: web/dist       #
-     #   env:
-     #     GITHUB_TOKEN: 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  # 自动使用 GitHub token 进行身份验证
+  CD-admin:
+    runs-on: windows-latest
+    needs: CI
+    steps:
+      - uses: actions/checkout@v4
+      - name: Admin deploy
+        run: 
+          cd admin && npm run serve
+  CD-web:
+    runs-on: windows-latest
+    needs: CI
+    steps:
+      - uses: actions/checkout@v4
+      - name: Web deploy
+        run: 
+          cd web && npm run serve       
+  CD-server:
+    runs-on: windows-latest
+    needs: CI
+    steps:
+      - uses: actions/checkout@v4
+      - name: server deploy
+        run: 
+          cd server && npm run serve       
+     
