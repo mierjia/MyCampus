@@ -17,12 +17,25 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Install dependencies
+  dependencies-install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Admin dependencies
         run: 
-          npm ci
+          npm i ./admin
+
+      - name: Server dependencies
+        run: 
+          npm i ./server
+     
+      - name: Web dependencies
+        run: 
+          npm i ./web
 
       - name: Build Vue app
         run: 
+          cd web 
           npm run build
 
       - name: Deploy to GitHub Pages
