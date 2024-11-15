@@ -38,12 +38,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: runserver
-        run: cd server && npm run serve
+      
       - name: Admin dependencies
         run: 
           npm i ./admin
-
+      - name: runserver
+        run: cd admin && npm run serve
       - name: Server dependencies
         run: 
           npm i ./server
@@ -70,12 +70,11 @@ jobs:
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
   # Single deploy job since we're just deploying
   deploy:
     environment:
       name: github-pages
-      url: https://mierjia.github.io/MyCampus/admin/dist
+      url:  http://localhost:8080/
     runs-on: windows-latest
     steps:
       - name: Checkout
@@ -86,7 +85,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
+          path: https://mierjia.github.io/MyCampus/admin/dist
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
