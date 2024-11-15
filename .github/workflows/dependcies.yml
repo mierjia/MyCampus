@@ -21,20 +21,12 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
-      - name: clear dependencies
-        run: 
-          npm cache clean --force
-          rm -rf node_modules package-lock.json
 
       - name: Server dependencies
         run: 
-          cd server
-      - name: Server dependencies-2
-        run: 
-          npm i
+          npm i ./server
+     
       - name: Web dependencies
         run: 
-          cd web
-      - name: Server dependencies-2
-        run: 
-          npm i
+          npm i ./web
+      
