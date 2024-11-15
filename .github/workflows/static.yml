@@ -11,9 +11,10 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
+  repository-projects: write
 
 # Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
 # However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
@@ -22,6 +23,54 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  install:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+  dependencies-install:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: runserver
+        run: cd server && npm run serve
+      - name: Admin dependencies
+        run: 
+          npm i ./admin
+
+      - name: Server dependencies
+        run: 
+          npm i ./server
+     
+      - name: Web dependencies
+        run: 
+          npm i ./web
+
+      - name: Build Vue app
+        run: 
+          cd web && npm run build
+          
+      - name: Commit build files
+        run: |
+          git config --global user.name "mierjia" 
+          git config --global user.email "2745414799@qq.com" 
+          
+          # 将生成的文件添加到仓库
+          git add -f web/dist  # 假设构建结果位于 dist 文件夹
+          
+          # 提交并推送到仓库
+          git commit -m "Add build files"
+          git push origin main  # 推送到 main 分支
+        env:
+          # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
   # Single deploy job since we're just deploying
   deploy:
     environment:
@@ -31,8 +80,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: runserver
-        run: cd server && npm run serve
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
