@@ -41,6 +41,6 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: main   # 部署到 gh-pages 分支
-          folder: dist       # 构建后的文件夹
+          folder: web/dist       # 构建后的文件夹
         env:
           GITHUB_TOKEN: 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  # 自动使用 GitHub token 进行身份验证
