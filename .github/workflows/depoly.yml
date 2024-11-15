@@ -36,11 +36,26 @@ jobs:
       - name: Build Vue app
         run: 
           cd web && npm run build
-
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          branch: page   # 部署到page 分支
-          folder: web/dist       # 构建后的文件夹
+          
+      - name: Commit build files
+        run: |
+          git config --global mierjia "github-actions"
+          git config --global 2745414799@qq.com "github-actions@github.com"
+          
+          # 将生成的文件添加到仓库
+          git add -f dist/*  # 假设构建结果位于 dist 文件夹
+          
+          # 提交并推送到仓库
+          git commit -m "Add build files"
+          git push origin main  # 推送到 main 分支
         env:
-          GITHUB_TOKEN: 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  # 自动使用 GitHub token 进行身份验证
+          # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
+          GITHUB_TOKEN: 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
+
+      # - name: Deploy to GitHub Pages
+      #  uses: JamesIves/github-pages-deploy-action@v4
+      #  with:
+       #   branch: page   # 部署到page 分支
+     #     folder: web/dist       # 构建后的文件夹
+     #   env:
+     #     GITHUB_TOKEN: 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  # 自动使用 GitHub token 进行身份验证
