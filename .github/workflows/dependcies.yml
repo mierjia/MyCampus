@@ -21,6 +21,10 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+      - name: clear dependencies
+        run: 
+          npm cache clean --force
+          rm -rf node_modules package-lock.json
 
       - name: Admin dependencies
         run: 
