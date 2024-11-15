@@ -28,9 +28,9 @@ jobs:
       - name: Admin dependencies
         run: 
           npm i ./admin
-      - name: Admin run
+      - name: Admin check
         run: 
-          cd admin && npm run serve
+          cd admin && npm run lint
       - name: Server dependencies
         run: 
           npm i ./server
@@ -38,6 +38,9 @@ jobs:
       - name: Web dependencies
         run: 
           npm i ./web
+      - name: Web check
+        run: 
+          cd admin && npm run lint
 
       - name: Build Vue app
         run: 
