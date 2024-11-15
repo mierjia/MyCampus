@@ -35,6 +35,7 @@ jobs:
           node-version: '20'
 
   dependencies-install:
+    needs: install
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
@@ -72,6 +73,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   # Single deploy job since we're just deploying
   deploy:
+    needs : dependencies-install
     environment:
       name: github-pages
       url:  http://localhost:8080/
