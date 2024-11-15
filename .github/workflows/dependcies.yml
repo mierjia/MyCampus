@@ -26,12 +26,6 @@ jobs:
           npm cache clean --force
           rm -rf node_modules package-lock.json
 
-      - name: Admin dependencies
-        run: 
-          cd admin
-      - name: Admin dependencies-2
-        run:
-          npm i 
       - name: Server dependencies
         run: 
           cd server
