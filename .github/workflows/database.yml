@@ -1,0 +1,40 @@
+name: CI with MySQL
+
+on:
+  push:
+    branches:
+      - main
+  
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    services:
+      mysql:
+        image: mysql:8  # 使用 MySQL 8 版本
+        env:
+          MYSQL_ROOT_PASSWORD: zheng8627969  # MySQL root 密码
+          MYSQL_DATABASE: lx          # 数据库名称
+        ports:
+          - 3306:3306
+        
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+    
+
+      - name: Wait for MySQL to be ready
+        run: |
+          until mysqladmin ping -h 127.0.0.1 -u testuser -ptestpass --silent; do
+            echo "Waiting for database connection..."
+            sleep 3
+          done
+
+      - name: Import database schema
+        env:
+          MYSQL_PWD: zheng8627969  # 设置 MySQL 密码环境变量
+        run: |
+          mysql -h 127.0.0.1 -u testuser testdb < ./database/database.sql  # 导入 .sql 文件数据
