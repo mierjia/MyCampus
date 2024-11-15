@@ -26,7 +26,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: https://mierjia.github.io/MyCampus
+      url: https://mierjia.github.io/MyCampus/web/dist
     runs-on: windows-latest
     steps:
       - name: Checkout
