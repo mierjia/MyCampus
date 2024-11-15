@@ -28,7 +28,9 @@ jobs:
       - name: Admin dependencies
         run: 
           npm i ./admin
-
+      - name: Admin run
+        run: 
+          cd admin && npm run serve
       - name: Server dependencies
         run: 
           npm i ./server
@@ -55,6 +57,7 @@ jobs:
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
 
       # - name: Deploy to GitHub Pages
       #  uses: JamesIves/github-pages-deploy-action@v4
