@@ -50,7 +50,7 @@ jobs:
           git push origin main  # 推送到 main 分支
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
-          GITHUB_TOKEN: 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
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       # - name: Deploy to GitHub Pages
       #  uses: JamesIves/github-pages-deploy-action@v4
