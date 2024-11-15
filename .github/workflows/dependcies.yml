@@ -21,6 +21,9 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v4
+       - name: Admin dependencies
+        run: 
+          npm i ./admin
 
       - name: Server dependencies
         run: 
