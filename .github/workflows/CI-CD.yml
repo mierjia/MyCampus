@@ -54,14 +54,6 @@ jobs:
         env:
           # 使用 GitHub Actions 自动提供的 GITHUB_TOKEN，避免手动配置 token
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  CD-admin:
-    runs-on: windows-latest
-    needs: CI
-    steps:
-      - uses: actions/checkout@v4
-      - name: Admin deploy
-        run: 
-          cd admin && npm run serve
   CD-web:
     runs-on: windows-latest
     needs: CI
@@ -78,4 +70,21 @@ jobs:
       - name: server deploy
         run: 
           cd server && npm run serve       
-     
+  Page:
+    environment:
+      name: github-pages
+      url:  http://localhost:8080/
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload entire repository
+          path: web/dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
