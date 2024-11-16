@@ -39,9 +39,6 @@ jobs:
       - name: Build Web
         run: 
           cd web && npm run build
-      - name: Build Admin
-        run: 
-          cd admin && npm run build
           
       - name: Commit build files
         run: |
@@ -49,7 +46,7 @@ jobs:
           git config --global user.email "2745414799@qq.com" 
           
           # 将生成的文件添加到仓库
-          git add -f web/dist admin/dist  # 假设构建结果位于 dist 文件夹
+          git add -f web/dist   # 构建结果位于 dist 文件夹
           
           # 提交并推送到仓库
           git commit -m "Add build files"
